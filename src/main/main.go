@@ -8,6 +8,7 @@ import (
 	"os"
 
 	"github.com/paulrosania/go-charset/charset"
+	_ "github.com/paulrosania/go-charset/data"
 	"gopkg.in/telegram-bot-api.v4"
 )
 
@@ -93,6 +94,7 @@ func main() {
 				data := fmt.Sprintf("%s %s \n", currencyRates.Currency[i].ISOCode, currencyRates.Currency[i].Value)
 				currencyInfo = currencyInfo + data
 			}
+			fmt.Println(currencyInfo)
 
 			message = tgbotapi.NewMessage(update.Message.Chat.ID, currencyInfo)
 		default:
