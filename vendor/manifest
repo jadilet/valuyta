@@ -2,6 +2,12 @@
 	"version": 0,
 	"dependencies": [
 		{
+			"importpath": "github.com/davidmz/go-charset",
+			"repository": "https://github.com/davidmz/go-charset",
+			"revision": "ae9805980c408d022114f8a40dd57e923d0e57cf",
+			"branch": "master"
+		},
+		{
 			"importpath": "github.com/technoweenie/multipartstreamer",
 			"repository": "https://github.com/technoweenie/multipartstreamer",
 			"revision": "a90a01d73ae432e2611d178c18367fbaa13e0154",
@@ -13,13 +19,6 @@
 			"revision": "513929065c19401a1c7b76ecd942f9f86a0c061b",
 			"branch": "master",
 			"path": "/html"
-		},
-		{
-			"importpath": "golang.org/x/net/html/charset",
-			"repository": "https://go.googlesource.com/net",
-			"revision": "513929065c19401a1c7b76ecd942f9f86a0c061b",
-			"branch": "master",
-			"path": "/html/charset"
 		},
 		{
 			"importpath": "golang.org/x/text/encoding",
