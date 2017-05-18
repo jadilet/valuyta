@@ -9,6 +9,13 @@
 			"path": "/charset"
 		},
 		{
+			"importpath": "github.com/paulrosania/go-charset/data",
+			"repository": "https://github.com/paulrosania/go-charset",
+			"revision": "621bb39fcc835dce592e682f5073025d0169587b",
+			"branch": "master",
+			"path": "/data"
+		},
+		{
 			"importpath": "github.com/technoweenie/multipartstreamer",
 			"repository": "https://github.com/technoweenie/multipartstreamer",
 			"revision": "a90a01d73ae432e2611d178c18367fbaa13e0154",
