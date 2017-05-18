@@ -7,8 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	"golang.org/x/net/html/charset"
-
+	"github.com/paulrosania/go-charset/charset"
 	"gopkg.in/telegram-bot-api.v4"
 )
 
@@ -42,8 +41,12 @@ func getCurrency() CurrencyRates {
 	var currencyRates CurrencyRates
 
 	decoder := xml.NewDecoder((response.Body))
-	decoder.CharsetReader = charset.NewReaderLabel
-	decoder.Decode(&currencyRates)
+	decoder.CharsetReader = charset.NewReader
+	err := decoder.Decode(&currencyRates)
+
+	if err != nil {
+		fmt.Println("Decoder error!")
+	}
 
 	return currencyRates
 }

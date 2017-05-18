@@ -2,44 +2,17 @@
 	"version": 0,
 	"dependencies": [
 		{
-			"importpath": "github.com/davidmz/go-charset",
-			"repository": "https://github.com/davidmz/go-charset",
-			"revision": "ae9805980c408d022114f8a40dd57e923d0e57cf",
-			"branch": "master"
+			"importpath": "github.com/paulrosania/go-charset/charset",
+			"repository": "https://github.com/paulrosania/go-charset",
+			"revision": "621bb39fcc835dce592e682f5073025d0169587b",
+			"branch": "master",
+			"path": "/charset"
 		},
 		{
 			"importpath": "github.com/technoweenie/multipartstreamer",
 			"repository": "https://github.com/technoweenie/multipartstreamer",
 			"revision": "a90a01d73ae432e2611d178c18367fbaa13e0154",
 			"branch": "master"
-		},
-		{
-			"importpath": "golang.org/x/net/html",
-			"repository": "https://go.googlesource.com/net",
-			"revision": "513929065c19401a1c7b76ecd942f9f86a0c061b",
-			"branch": "master",
-			"path": "/html"
-		},
-		{
-			"importpath": "golang.org/x/text/encoding",
-			"repository": "https://go.googlesource.com/text",
-			"revision": "19e51611da83d6be54ddafce4a4af510cb3e9ea4",
-			"branch": "master",
-			"path": "/encoding"
-		},
-		{
-			"importpath": "golang.org/x/text/internal/utf8internal",
-			"repository": "https://go.googlesource.com/text",
-			"revision": "19e51611da83d6be54ddafce4a4af510cb3e9ea4",
-			"branch": "master",
-			"path": "/internal/utf8internal"
-		},
-		{
-			"importpath": "golang.org/x/text/language",
-			"repository": "https://go.googlesource.com/text",
-			"revision": "19e51611da83d6be54ddafce4a4af510cb3e9ea4",
-			"branch": "master",
-			"path": "/language"
 		},
 		{
 			"importpath": "gopkg.in/telegram-bot-api.v4",
