@@ -1,22 +1,23 @@
 package main
 
 import (
-	"encoding/json"
-	"io/ioutil"
+	"encoding/xml"
+	"fmt"
 	"log"
 	"net/http"
 	"os"
+
+	"golang.org/x/net/html/charset"
 	"gopkg.in/telegram-bot-api.v4"
 )
 
-type Joke struct {
-	ID   uint32 `json:"id"`
-	Joke string `json:"joke"`
-}
-
-type JokeResponse struct {
-	Value Joke   `json:"value"`
-	Type  string `json:"type"`
+type CurrencyRates struct {
+	Date     string `xml:"Date,attr"`
+	Currency []struct {
+		ISOCode string `xml:"ISOCode,attr"`
+		Nominal int    `xml:"Nominal"`
+		Value   string `xml:"Value"`
+	}
 }
 
 var buttons = []tgbotapi.KeyboardButton{
@@ -26,26 +27,24 @@ var buttons = []tgbotapi.KeyboardButton{
 // При старте приложения, оно скажет телеграму ходить с обновлениями по этому URL
 const WebhookURL = "https://valuyta.herokuapp.com/"
 
-func getJoke() string {
+func getCurrency() CurrencyRates {
 	client := http.Client{}
-	response, error := client.Get("http://api.icndb.com/jokes/random?limitTo=[nerdy]")
+	response, error := client.Get("http://www.nbkr.kg/XML/daily.xml")
 
 	if error != nil {
-		return "Joke api not responding!"
+		log.Println("NBKR not responding")
+		return CurrencyRates{}
 	}
 
 	defer response.Body.Close()
 
-	body, _ := ioutil.ReadAll(response.Body)
-	joke := JokeResponse{}
+	var currencyRates CurrencyRates
 
-	err := json.Unmarshal(body, &joke)
+	decoder := xml.NewDecoder((response.Body))
+	decoder.CharsetReader = charset.NewReaderLabel
+	decoder.Decode(&currencyRates)
 
-	if err != nil {
-		return "Joke error while parsing!"
-	}
-
-	return joke.Value.Joke
+	return currencyRates
 }
 
 func main() {
@@ -82,7 +81,16 @@ func main() {
 		switch update.Message.Text {
 		case "Валюта":
 			// Если пользователь нажал на кнопку, то придёт сообщение "Валюта"
-			message = tgbotapi.NewMessage(update.Message.Chat.ID, "https://valuta.kg/")
+			var currencyRates CurrencyRates
+			currencyRates = getCurrency()
+			currencyInfo := fmt.Sprintf("КУРС НБКР\nпродажа\n")
+
+			for i, _ := range currencyRates.Currency {
+				data := fmt.Sprintf("%s %s \n", currencyRates.Currency[i].ISOCode, currencyRates.Currency[i].Value)
+				currencyInfo = currencyInfo + data
+			}
+
+			message = tgbotapi.NewMessage(update.Message.Chat.ID, currencyInfo)
 		default:
 			message = tgbotapi.NewMessage(update.Message.Chat.ID, `Нажмите "Валюта"`)
 		}
@@ -92,5 +100,4 @@ func main() {
 
 		bot.Send(message)
 	}
-
 }
