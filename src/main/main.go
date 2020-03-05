@@ -55,7 +55,8 @@ func getCurrency() CurrencyRates {
 func main() {
 	// Heroku прокидывает порт для приложения в переменную окружения PORT
 	port := os.Getenv("PORT")
-	bot, err := tgbotapi.NewBotAPI("351660528:AAGp-U1bseZwIzWvxTwroQNHm1JCPA7TSXY")
+	token := os.Getenv("TELEGRAM_TOKEN")
+	bot, err := tgbotapi.NewBotAPI(token)
 
 	if err != nil {
 		log.Fatal(err)
